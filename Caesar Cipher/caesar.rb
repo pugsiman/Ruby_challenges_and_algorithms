@@ -7,7 +7,7 @@ def caesar_cipher(text, shift)
 		if "!?., ".include?(char)
 			result_text << char
 		else
-			ciphered_char = alphabet[(alphabet.index(char.downcase) + shift)]
+			ciphered_char = alphabet[(alphabet.index(char.downcase) + shift) % alphabet.size]
 			if char == char.upcase
 				result_text << ciphered_char.upcase
 			else
