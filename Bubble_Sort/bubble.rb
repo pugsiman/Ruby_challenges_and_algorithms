@@ -20,7 +20,7 @@ def bubble_sort_by(array)
 		bubble_sorted=true
 		for a in (0..(array.length-2) )
 			if (yield(array[a],array[a+1])) && (yield(array[a],array[a+1])) > 0
-				sorted = false
+				bubble_sorted = false
 				array[a], array[a+1] = array[a+1], array[a]
 			end
 		end
