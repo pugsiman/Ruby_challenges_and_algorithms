@@ -2,7 +2,7 @@ def equil(array)
 	left, right = 0, a.inject(0, :+)
 	indices = []
  
-	a.each_with_index do |val, i|
+	array.each_with_index do |val, i|
 		right -= val
 		indices << i if right == left
 		left += val
