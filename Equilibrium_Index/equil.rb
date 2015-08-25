@@ -1,9 +1,15 @@
 def equil(array)
-	indices =[]
-	array.each_index.select do |i|
-		indices << i if array[0...i].inject(:+) == array[i+1..-1].inject(0, :+)
+	left, right = 0, a.inject(0, :+)
+	indices = []
+ 
+	a.each_with_index do |val, i|
+		right -= val
+		indices << i if right == left
+		left += val
 	end
-	indices
+	indices << -1 if indices.empty?
+	
+	indices.join(", ").to_i
 end
 
 p equil [-7, 1, 5, 2, -4, 3, 0]
