@@ -1,5 +1,5 @@
 def equil(array)
-	left, right = 0, a.inject(0, :+)
+	left, right = 0, array.inject(0, :+)
 	indices = []
  
 	array.each_with_index do |val, i|
