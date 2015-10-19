@@ -1,16 +1,17 @@
 def equil(array)
-	left, right = 0, array.inject(0, :+)
-	indices = []
- 
-	array.each_with_index do |val, i|
-		right -= val
-		indices << i if right == left
-		left += val
-	end
-	indices << -1 if indices.empty?
-	
-	indices.join(", ").to_i
+  left = 0
+  right = array.inject(0, :+)
+  indices = []
+
+  array.each_with_index do |val, i|
+    right -= val
+    indices << i if right == left
+    left += val
+  end
+  indices << '-1 (none)' if indices.empty?
+
+  indices.join(', ')
 end
 
-p equil [-7, 1, 5, 2, -4, 3, 0]
-p equil [-1, 0, 1]
+puts equil [-7, 1, 5, 2, -4, 3, 0]
+puts equil [-1, 0, 1]

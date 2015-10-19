@@ -1,20 +1,19 @@
 def caesar_cipher(text, shift)
-	alphabet = ('a'..'z').to_a
-  result_text = ''
+  alphabet = ('a'..'z').to_a
 
-	text.split('').each do |char|
-	  if '!?., '.include?(char)
-	  	result_text << char
-	  else
-			ciphered_char = alphabet[(alphabet.index(char.downcase) + shift) % alphabet.size]
-	  	if char == char.upcase
-				result_text << ciphered_char.upcase
-	  	else
-				result_text << ciphered_char
-	  	end
-	  end
+  result_text = text.split('').map do |char|
+    if '!?., '.include?(char)
+      char
+    else
+      ciphered_char = alphabet[(alphabet.index(char.downcase) + shift) % alphabet.size]
+      if char == char.upcase
+        ciphered_char.upcase
+      else
+        ciphered_char
+      end
+    end
   end
-  return result_text.strip
+  result_text.join
 end
 
-print caesar_cipher("What a string!", 5)
+print caesar_cipher('What a string!', 5)
