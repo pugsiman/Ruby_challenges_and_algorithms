@@ -33,24 +33,31 @@ module Enumerable
 
   def my_none?
     none = true
-    my_each { |i| none = false unless yield(i) }
+    my_each { |i| yield(i) ? none = false : none }
     none
   end
 
-  def my_count
-    my_select { |i| yield(i) }.length
+  def my_count(arg = nil)
+    if block_given?
+      my_select { |i| yield(i) }.length
+    else
+      count = 0
+      my_each { |i| count += 1 if arg == i }
+      my_each { count += 1 if arg.nil? }
+      count
+    end
   end
 
-  def my_map(a)
+  def my_map
     new_array = []
-    my_each { |i| new_array << a.call(i) }
+    my_each { |i| new_array << yield(i) }
     new_array
   end
 
   def my_inject(memo = nil)
     array = memo.nil? ? self[1...size] : self
     memo ||= self[0]
-    array.my_each { |i, _a| memo = yield(memo, i) }
+    array.my_each { |i| memo = yield(memo, i) }
     memo
   end
 
@@ -58,33 +65,3 @@ module Enumerable
     my_inject { |a, b| a * b }
   end
 end
-
-p [1, 2, 3].my_each { |num| print "num: #{num} |" }
-
-puts '-------------------------------------------------------------------------'
-
-p [1, 3, 5].my_each_with_index { |num, idx| print "num: #{num}, index:#{idx}|" }
-
-puts '-------------------------------------------------------------------------'
-
-p [1, 2, 3, 4, 5].my_select { |num| num > 3 }
-
-puts '-------------------------------------------------------------------------'
-
-p %w(a bc def).my_any? { |i| i.length > 2 }
-
-puts '-------------------------------------------------------------------------'
-
-p %w(a bc def).my_all? { |i| i.length < 2 }
-
-puts '-------------------------------------------------------------------------'
-
-p %w(a bc def).my_none? { |i| i.length > 2 }
-
-puts '-------------------------------------------------------------------------'
-
-p %w(a bc def).my_count { |i| i.length < 3 }
-
-puts '-------------------------------------------------------------------------'
-
-p [1, 2, 3, 4].multiply_els { |num| num * num }
