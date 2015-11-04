@@ -6,11 +6,7 @@ def caesar_cipher(text, shift)
       char
     else
       ciphered_char = alphabet[(alphabet.index(char.downcase) + shift) % alphabet.size]
-      if char == char.upcase
-        ciphered_char.upcase
-      else
-        ciphered_char
-      end
+      char == char.upcase ? ciphered_char.upcase : ciphered_char
     end
   end
   result_text.join
