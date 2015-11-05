@@ -16,4 +16,4 @@ def merge(left, right)
   end
 end
 
-print merge_sort [7,4,2,5,9,5,1]
+print merge_sort [7, 4, 2, 5, 9, 5, 1]
